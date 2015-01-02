@@ -4,8 +4,8 @@
 
 [Accounts]()  
 
-    * [Independent Accounts](independent-accounts.md)     
-    * [Hosted Accounts](hosted-accounts.md)  
+  * [Independent Accounts](independent-accounts.md)     
+  * [Hosted Accounts](hosted-accounts.md)  
     
 [Api Routes](api-routes.md)  
 
