@@ -1,4 +1,4 @@
 dinexcode.github.io
 ===================
 
-Dinex services wiki and help material
+Sitio de ayuda para los usuarios de Dinex

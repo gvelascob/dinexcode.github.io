@@ -1,12 +1,32 @@
-# Dinex Wiki  
+# Ayuda de Dinex  
 
-[Home](index.md)   
+[Inicio](index.md)   
 
-[Accounts]()  
+[Preguntas Frecuentes](faq.md)    
 
-  * [Independent Accounts](independent-accounts.md)     
-  * [Hosted Accounts](hosted-accounts.md)  
+[Cuentas]()  
+
+  * [Pagar con Dinex](cuentas-independientes.md)     
+  * [Recibir pagos con Dinex](cuentas-dependientes.md)  
     
-[Api Routes](api-routes.md)  
+[Tutoriales](tutoriales.md)
+
+[Condiciones]()  
+
+  * [Términos de Uso](eula.md)     
+  * [Seguridad](seguridad.md)      
+  * [Privacidad](privacidad.md)       
+  * [Legal](legal.md)       
+
+[Precios]()  
+
+  * [Para el que paga](cuentas-independientes-precio.md)     
+  * [Para el que recibe](cuentas-independientes-precio.md)     
+
+
+[Dinex para Empresas](empresas.md)   
+
+[Documentación](docs.md)   
+
 
 [gimmick:theme](flatly)
