@@ -1,7 +1,5 @@
 # Ayuda de Dinex  
 
-[Inicio](index.md)   
-
 [Preguntas Frecuentes](faq.md)    
 
 [Cuentas]()  
