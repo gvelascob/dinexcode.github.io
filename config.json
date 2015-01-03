@@ -1,6 +1,5 @@
 {
     "useSideMenu": true,
     "lineBreaks": "gfm",
-    "additionalFooterText": "Código fuente en dinexcode@github",
-    "anchorCharacter": "#"
+    "additionalFooterText": "Código fuente <a href=\"https://github.com/dinexcode\" target=\"_blank\">@dinexcode</a> | "
 }

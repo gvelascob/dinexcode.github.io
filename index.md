@@ -8,6 +8,7 @@ Aquí encontrarás todo lo necesario para ocupar los servicios de Dinex y resolv
 
 ## ¿Para quién es Dinex?   
 
+## Contacto  
 
 
 [gimmick:Disqus](dinexinfo)

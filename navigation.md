@@ -1,13 +1,14 @@
 # Ayuda de Dinex  
 
-[Preguntas Frecuentes](faq.md)    
+[Servicios]()  
 
-[Cuentas]()  
-
-  * [Pagar con Dinex](cuentas-independientes.md)     
-  * [Recibir pagos con Dinex](cuentas-dependientes.md)  
+  * [Pagar con Dinex](cuenta-pagador.md)     
+  * [Recibir pagos con Dinex](cuenta-receptor.md)  
     
-[Tutoriales](tutoriales.md)
+[Costos]()  
+
+  * [Para el que paga](cuenta-pagador-precio.md)     
+  * [Para el que recibe](cuenta-receptor-precio.md)     
 
 [Condiciones]()  
 
@@ -16,15 +17,11 @@
   * [Privacidad](privacidad.md)       
   * [Legal](legal.md)       
 
-[Precios]()  
+[Tutoriales](tutoriales.md)
 
-  * [Para el que paga](cuentas-independientes-precio.md)     
-  * [Para el que recibe](cuentas-independientes-precio.md)     
-
+[Preguntas Frecuentes](faq.md)    
 
 [Dinex para Empresas](empresas.md)   
-
-[Documentación](docs.md)   
 
 
 [gimmick:theme](flatly)   
