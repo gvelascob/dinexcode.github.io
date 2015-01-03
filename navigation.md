@@ -1,5 +1,7 @@
 # Ayuda de Dinex  
 
+[Preguntas Frecuentes](faq.md)    
+
 [Servicios]()  
 
   * [Pagar con Dinex](cuenta-pagador.md)     
@@ -12,14 +14,12 @@
 
 [Condiciones]()  
 
-  * [Términos de Uso](eula.md)     
   * [Seguridad](seguridad.md)      
-  * [Privacidad](privacidad.md)       
+  * [Privacidad](privacidad.md)    
+  * [Términos de Uso](eula.md)  
   * [Legal](legal.md)       
 
 [Tutoriales](tutoriales.md)
-
-[Preguntas Frecuentes](faq.md)    
 
 [Dinex para Empresas](empresas.md)   
 
