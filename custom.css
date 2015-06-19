@@ -1,0 +1,262 @@
+/* navbar */
+.navbar-default {
+    background-color: #36aaea !important;
+    border-color: #1995cc !important;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: white !important;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: white !important;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff !important;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #fff !important;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #ffffff !important;
+    background-color: #1995cc !important;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #fff !important;
+    background-color: #1995cc !important;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #ffffff !important;
+    border-bottom-color: #ffffff !important;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>.active>a, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
+  color: #fff;
+  background-color: #575f67 !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #575f67 !important;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #575f67 !important;
+}
+
+body {
+  font-family: 'Regular' !important;
+  color: #575f67 !important;
+  text-align: justify !important;;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #575f67 !important;
+}
+
+a {
+  color: #36aaea !important;
+  text-decoration: none;
+  font-family: 'Regular' !important;
+
+}
+
+.dropdown a {
+  color: white !important;
+  text-decoration: none;
+}
+
+#md-page-menu a.active {
+  /* background-color: rgba(0, 0, 0, 0.01); */
+  font-weight: normal!important;
+  padding-left: 0px !important;;
+}
+
+h1 {
+  text-align: center !important;
+  font-family: 'Semibold' !important;  
+  color: #1995cc !important;
+}
+
+h2, h3, h4, h5, h6 {
+    text-align: left !important;;
+    font-family: 'Regular' !important;   
+    color: #36aaea !important;
+}
+
+@font-face {
+
+font-family: 'Regular';
+
+src: local ("Regular"), 
+
+src: url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans_-Regular-webfont.eot');
+
+src: url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans_-Regular-webfont.eot?#iefix') format('eot'),
+
+url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Regular-webfont.woff') format('woff'), 
+  
+url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Regular-webfont.woff2') format('woff2'), 
+
+url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/Neo_Sans.ttf') format('truetype'),
+
+url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans.svg#webfont') format('svg');
+
+font-weight: 400;
+
+font-style: normal; 
+
+}
+
+@font-face {
+
+	font-family: 'Semibold';
+
+	src: local ("Semibold"), 
+
+	src: url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Semibold-webfont.eot');
+
+	src: url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Semibold-webfont.eot?#iefix') format('eot'),
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Semibold-webfont.woff') format('woff'), 
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Semibold-webfont.woff2') format('woff2'), 
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Semibold-webfont.ttf') format('truetype'),
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Medium.svg#webfont') format('svg');
+
+	font-weight: 400;
+
+	font-style: normal; 
+
+}
+
+@font-face {
+
+	font-family: 'Boldest';
+
+	src: local ("Boldest"), 
+
+	src: url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Bold-webfont.eot');
+
+	src: url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Bold-webfont.eot?#iefix') format('eot'),
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Bold-webfont.woff') format('woff'), 
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Bold-webfont.woff2') format('woff2'), 
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Bold-webfont.ttf') format('truetype'),
+
+	url('//dinex.zendesk.com/hc/theme_assets/729509/200098478/NeoSans-Bold.svg#webfont') format('svg');
+
+	font-weight: 400;
+
+	font-style: normal; 
+
+}
+
+
+
+
+
+
+.page-header {
+  border-bottom: 1px solid #dddfe0 !important;
+}
+
+.list-group-item {
+  border: none !important;
+    background-color: inherit !important;
+}
+
+.panel-default {
+      border: 1px solid #9a9fa3 !important;
+    
+}
+
+.panel {
+  box-shadow: none !important;
+}
+
+.panel>.list-group .list-group-item:first-child {
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;  
+}
+
+.list-group-item:nth-child(even) {
+    background-color: #eeefef !important;
+}
+
+    
+
+
+
+
+
+#email_validation, #name_validation, #human_validation {
+    display:none;
+}
+
+label.required:after {
+  content:'*';
+  color:red;
+}
+
+span.error {
+  background-color:#ffe5ea;
+  color:red;
+}
+
+.rowfirst {
+  margin-bottom: -1000px;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.rowsubmit {
+  margin-bottom:-100px;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.rowend {
+  margin-bottom:-75px;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.submitzendesk {
+     margin-bottom:125px;
+ 
+}
+.form-control {
+  color: #575f67 !important;
+  border: 2px solid #dddfe0 !important;
+        font-family: 'Regular' !important;
+}
+
+.form-control:hover {
+  color: #575f67 !important;
+  border: 2px solid #1995cc !important;
+        font-family: 'Regular' !important;
+}
+
+#contact_form {
+  margin-top: -100px !important;
+  margin-bottom: -150px !important;
+    font-family: 'Regular' !important;
+}

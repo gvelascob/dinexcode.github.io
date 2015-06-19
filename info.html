@@ -1,0 +1,408 @@
+<html lang="en-us" id="extr-page"><head>
+      <meta charset="utf-8">
+      <title> Ticket assignment automation for Zendesk</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <!-- #CSS Links -->
+      <!-- Basic Styles -->
+      <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+      <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+      <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+      <!-- SmartAdmin RTL Support -->
+      <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+      <!-- We recommend you use "your_style.css" to override SmartAdmin
+         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+         <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+      <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+      <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+      <!-- #FAVICONS -->
+      <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+      <!-- #GOOGLE FONT -->
+      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+      <!-- #APP SCREEN / ICONS -->
+      <!-- Specifying a Webpage Icon for Web Clip 
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+      <link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+      <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <!-- Startup image for web apps 
+      <link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+      <link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+      <link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">-->
+   
+      <!-- start Mixpanel -->
+	  <script id="twitter-wjs" src="http://platform.twitter.com/widgets.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"></script><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+	  mixpanel.init("0873b595ecd6f98274164fe39b9986cf");//bb4e670828aadd93e3f99a71b869b406 0873b595ecd6f98274164fe39b9986cf
+	  mixpanel.register({"url": window.location.hostname+window.location.pathname, "_ip":"undefined", "_useragent":navigator.userAgent, "error":""});
+	  </script>
+	  
+	  <script type="text/javascript">
+	  var _user_id="undefined", _ip="undefined"; _app_url="undefined"; _event="undefined";
+	  function track(user_id, ip, ms)
+	  {
+		if (user_id) {mixpanel.identify(user_id); _user_id=user_id};
+		if (ip) {mixpanel.register({"_ip":ip}); _ip=ip};
+		if (ms) {_ms=ms};
+	  };
+	  </script>
+	  
+	  <script type="text/javascript" src="http://shuserid.appspot.com/jsonp_user_id?callback=track"></script>
+	  <!-- end Mixpanel -->
+
+	  <!-- Google Analytics -->
+	  <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-59226639-1', 'auto');
+       ga('require', 'displayfeatures');
+      </script>
+	  <!-- Google Analytics -->
+
+   
+   <style type="text/css"></style></head>
+   <body id="login" class="desktop-detected   mobile-detected mobile-view-activated    pace-done pace-done" data-twttr-rendered="true"><div class="pace  pace-inactive pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div><div style="position: fixed; margin: 0px; padding: 0px; outline: none; border: none; z-index: 999999999; overflow: visible; direction: ltr; left: auto; right: 50px; top: auto; bottom: 0px; width: 168px; height: 42px;"><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; border-radius: 18px; background: rgb(255, 255, 255);"><a class="shareButtonNetfbLink" title="Facebook" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; border: none; background: url(http://sharebutton.net/plugin/img/fb.png?4);"></a></span></span><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; border-radius: 18px; background: rgb(255, 255, 255);"><a class="shareButtonNetgpLink" title="Google+" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; border: none; background: url(http://sharebutton.net/plugin/img/gp.png?4);"></a></span></span><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; border-radius: 18px; background: rgb(255, 255, 255);"><a class="shareButtonNettwLink" title="Twitter" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; border: none; background: url(http://sharebutton.net/plugin/img/tw.png?4);"></a></span></span><span style="display: inline-block;"><span style="display: inline-block; position: relative; margin: 3px; width: 36px; height: 36px; border-radius: 18px; background: rgb(255, 255, 255);"><a class="shareButtonNetplusLink" title="More" href="javascript:;" style="display: inline-block; margin: 2px; padding: 0px; width: 32px; height: 32px; vertical-align: bottom; border: none; background: url(http://sharebutton.net/plugin/img/plus.png?4);"></a></span></span></div>
+      <div class="pace  pace-inactive">
+         <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+            <div class="pace-progress-inner"></div>
+         </div>
+         <div class="pace-activity"></div>
+      </div>
+      <header id="header">
+         <!--<span id="logo"></span>-->
+         <div id="logo-group">
+            <span id="logo"> <img src="img/logo.png" alt="Round Robin"> </span>
+            <!-- END AJAX-DROPDOWN -->
+         </div>
+		 <p class="text-right"> <br>
+				  <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.0b0ceee8fa9e1bde648efd58520a750f.en.html#_=1434730517588&amp;dnt=true&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=RoundRobinApp&amp;show_count=false&amp;show_screen_name=true&amp;size=l" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="position: static; visibility: visible; width: 200px; height: 28px;"></iframe>
+				  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		 </p>
+      </header>
+      <div id="main" role="main">
+         <!-- MAIN CONTENT -->
+         <div id="content" class="container">
+            <div class="row">
+               <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
+                  <h1 class="txt-color-red login-header-big">Ticket assignment automation for Zendesk</h1>
+                  <div>
+                     <blockquote>
+                        <p>Automated even load distribution = happy support agents = happy supervisors :)</p>
+                        <a href="https://support.zendesk.com/hc/communities/public/posts/203421946-Round-Robin-assignment?sort_by=votes" target="_blank"><small><cite title="Zendesk community forum">(Zendesk community forum)</cite></small></a>
+                     </blockquote>
+                  </div>
+                  <div class="hero">
+                     <div class="pull-left login-desc-box-l">
+                        <h4 class="paragraph-header"><strong>Round Robin App</strong> is a service that automatically assigns tickets to the agents in your Zendesk<sup>®</sup> in a round robin fashion.</h4>
+                        <h4 class="paragraph-header">
+                           <strong>Features:</strong>
+                           <ul>
+                              <li>Round robin assignment</li>
+                              <li>Agent ticket queue limiting</li>
+							  <li>Queue prioritization</li>
+							  <li>Agent skills based ticket assignment</li>
+                           </ul>
+                        </h4>
+						<h4 class="paragraph-header">
+                           <strong>Coming soon:</strong>
+                           <ul>
+                              <li>Assigning by agent's work schedules (support teams in different time zones)</li>
+                              <li>Assigning tickets to available agents</li>
+							  <li>Assigning a ticket by agent request</li>
+                           </ul>
+                           Click here to learn 
+						   <a href="https://roundrobin.zendesk.com/hc/en-us/articles/202636392" target="_blank"><strong>How it works</strong></a>.<br> <br>
+						   Round Robin works on Google App Engine. You can try it completely <strong>FREE</strong>. <br>Get your Round Robin App in one click!
+                        </h4>
+
+
+                     </div>
+                  </div>
+				  <div class="row">
+				  <h1 class="txt-color-red login-header-big">What our customers say</h1>
+                  <div style="margin-top: 25px;">
+                     <blockquote>
+                        <p>@RoundRobinApp Great job on this app! We've implemented it for our @Zendesk and it's working beautifully!</p>
+                        <small><cite title="1"><strong>Matt Frowe</strong> Head of Customer Service, <a href="http://www.cambridgeenglish.org" target="_blank">cambridgeenglish.org</a></cite></small>
+                     </blockquote>
+                  </div>
+				  <div style="margin-top: 25px;">
+                     <blockquote>
+                        <p>That's awesome! This app has been a huge help to my team and I look forward to some of the features you plan on adding.</p>
+                        <small><cite title="1"><strong>Chad Hester</strong> Head of Support, <a href="https://phobio.com/" target="_blank">phobio.com</a></cite></small>
+                     </blockquote>
+                  </div>
+				  <div style="margin-top: 25px;">
+                     <blockquote>
+                        <p>I love the tool. This is something that we have been wanting for a long time.</p>
+                        <small><cite title="1"><strong>John Beard</strong> Senior Systems Architect</cite></small>
+                     </blockquote>
+                  </div>
+				  
+				  </div>
+                  <div class="row">
+          <!--            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">Features</h5>
+                        <ul>
+                           <li>Roun robin agent load balancing</li>
+                           <li>Skill-based ticket assignment</li>
+                           <li>Completely FREE for the beta period, and up to 100 assignment per month after that</li>
+                        </ul>
+                     </div>
+                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h5 class="about-heading">Under the hood</h5>
+                        <ul>
+                           <li>Google App Engine<sup>®</sup> infrastructure - high uptime</li>
+                           <li>Google<sup>®</sup> authorization - enterprise level of security</li>
+                           <li>Queue-based asynchronous processing, avoiding network issues and Zendesk<sup>®</sup> API rate limits</li>
+                        </ul>
+                     </div> -->
+                  </div>
+               </div>
+               <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                 
+				 <div class="well no-padding">
+				  
+				  
+				  
+				  <!-- START SECTION 1 ZENDESK FORM INTEGRATION EXAMPLE. ENDPOINT https://roundrobin.zendesk.com/requests/embedded/create/-->
+				    
+				  
+                     <form action="https://roundrobin.zendesk.com/requests/embedded/create/" method="post" id="smart-form-register" class="smart-form client-form submited" novalidate="novalidate">
+                        <header>
+                           Get Round Robin App for FREE
+                        </header>
+                        <fieldset>
+                           <input type="hidden" name="subject" value="Thank you for registration!">
+						   <input type="hidden" name="description" value="Sorry, Round Robin App is in beta stage. Therefore, we have to limit the number of new accounts. Your Round Robin App will be created within 24 hours. I will inform you by email.">
+                           <section>
+                              <label class="input state-success"> <i class="icon-append fa fa-user"></i>
+                              <input type="text" name="name" placeholder="Full name" class="valid">
+                              <b class="tooltip tooltip-bottom-right">Нow do we addres you?</b> </label><em for="name" class="invalid" style="display: none;">Please enter your full name</em>
+                           </section>
+                           <section>
+                              <label class="input state-success"> <i class="icon-append fa fa-envelope"></i>
+                              <input type="email" name="email" placeholder="Email address" class="valid">
+                              <b class="tooltip tooltip-bottom-right">Your e-mail for communication</b> </label><em for="email" class="invalid" style="display: none;">Please enter your email address</em>
+                           </section>
+
+                           <section>
+                           </section>
+                        </fieldset>
+                        <footer>
+                           <button class="btn btn-danger">
+                           Register
+                           </button>
+                        </footer>
+                        <div id="post-registration-message" class="message"><i class="fa fa-exclamation"></i><p>Thank you for registration! <br>Sorry, Round Robin App is in beta stage. Therefore, we have to limit the number of new accounts. Your Round Robin App will be created within 24 hours. <br>We will inform you by email.</p></div>
+                     </form>
+	 
+					 
+				<!-- END SECTION 1 ZENDESK FORM INTEGRATION EXAMPLE. ENDPOINT https://roundrobin.zendesk.com/requests/embedded/create/-->	 
+					 
+ 
+                  </div>
+                  <p class="note text-center">Round Robin App uses Google authentication. <br>To use the app you need to have a Google account.</p>
+				  <div id="ticketsAssignedBlock" style="">
+				    <p class="text-center font-xl txt-color-purple login-header-big"><br>Tickets <span id="ticketsAssigned" class="font-sm label bg-color-purple">56,838</span> assigned</p>
+				    <p class="note text-center"><br>Since Feb 2015</p>
+				  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+      <script src="js/plugin/pace/pace.min.js"></script>
+      <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script> if (!window.jQuery) { document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');} </script><script src="js/libs/jquery-2.1.1.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      <script> if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');} </script><script src="js/libs/jquery-ui-1.10.3.min.js"></script>
+      <script src="http://malsup.github.com/jquery.form.js"></script>
+	  <script src="js/libs/countUp.min.js"></script>
+      <!-- IMPORTANT: APP CONFIG -->
+      <script src="js/app.config.js"></script>
+      <!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
+         <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+      <!-- BOOTSTRAP JS -->		
+      <script src="js/bootstrap/bootstrap.min.js"></script>
+      <!-- JQUERY VALIDATE -->
+      <script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+      <!-- JQUERY MASKED INPUT -->
+      <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+      <!--[if IE 8]>
+      <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+      <![endif]-->
+      <!-- MAIN APP JS FILE -->
+      <script src="js/app.min.js"></script>
+	  
+	  <script type="text/javascript">
+      
+	  function show_process() {
+	  $("#post-registration-message").html("<i class='fa fa-refresh fa-spin' style='border:0px; font-size:60px'></i><p>Processing...</p>");
+      $("#smart-form-register").addClass('submited');
+      };
+	  
+	  function show_success(app_url) {
+	  $("#post-registration-message").html("<i class='fa fa-check'></i><p>Your Round Robin App has been created at url:</br>"+app_url+"<br><a href='"+app_url+"' target='_blank' style='padding: 7px; margin: 7px; font-size:16px' class='btn btn-success'>Go to App</a></p>");
+      $("#smart-form-register").addClass('submited');
+      };
+      
+	  function show_error() {
+	  $("#post-registration-message").html("<i class='fa fa-exclamation'></i><p>Thank you for registration! <br>Sorry, Round Robin App is in beta stage. Therefore, we have to limit the number of new accounts. Your Round Robin App will be created within 24 hours. <br>We will inform you by email.</p>");
+      $("#smart-form-register").addClass('submited');
+      };
+		  
+      </script>
+	  
+      <script type="text/javascript">
+         runAllForms();
+         
+         // Validation
+         $(function() {
+         	// Validation
+         	$("#smart-form-register").validate({
+         
+         		// Rules for form validation
+         		rules : {
+         			name : {
+         				required : true
+         			},
+         			email : {
+         				required : true,
+         				email : true
+         			}
+         		},
+         
+         		// Messages for form validation
+         		messages : {
+         			name : {
+         				required : 'Please enter your full name'
+         			},
+         			email : {
+         				required : 'Please enter your email address',
+         				email : 'Please enter your email address'
+         			}
+         		},
+         
+		 
+		 <!-- START SECTION 2 ZENDESK FORM INTEGRATION EXAMPLE -->	 
+		 
+         		// Ajax form submition
+         		submitHandler : function(form) {
+         			
+					var app_url; 		
+		            var pro_url="http://793f980e-27dd-43e8-bc9f.rr-admin-02.appspot.com/get?action=get&uid="+_user_id;
+                    mixpanel.people.set({
+                               "$name": form.name.value,
+                               "$email": form.email.value,
+							   "_id": _user_id
+                            });
+					$.ajax({
+                    url: pro_url,
+	                type: "GET",
+	                dataType: "text",
+		            cache: false,
+	                timeout: 120000,
+					beforeSend: function(){show_process()},
+        	        success: function(answer){
+            	      var obj = $.parseJSON(answer);
+				      if ((obj.result=="ok") || (obj.result=="found"))
+						 {
+                             
+                           mixpanel.people.set({"$initial_referring_domain": obj.url});
+						   mixpanel.track("rr cre app "+obj.result, {"app": obj.url});
+						   ga('send', 'event', 'RegForm', 'Registration');
+						   show_success(obj.url);
+						   if (obj.result=="ok"){
+						      form.description.value="Link to your Round Robin App is "+obj.url;
+						      $(form).ajaxSubmit();
+							  }
+						 } 
+					  else 
+					     {
+						  mixpanel.track("rr cre app error");
+						  show_error();
+						  form.description.value="Sorry, Round Robin App is in beta stage. Therefore, we have to limit the number of new accounts. Your Round Robin App will be created within 24 hours. I will inform you by email.";
+						  $(form).ajaxSubmit();
+						 }
+        	        },
+        	        error: function(XMLHttpRequest, textStatus, ErrorThrown){
+            	      mixpanel.track("rr cre app error");
+					  show_error();
+					  form.description.value="Sorry, Round Robin App is in beta stage. Therefore, we have to limit the number of new accounts. Your Round Robin App will be created within 24 hours. I will inform you by email.";
+					  $(form).ajaxSubmit();
+        	        }
+                    });
+
+         		},
+				
+         <!-- END SECTION 2 ZENDESK FORM INTEGRATION EXAMPLE -->
+		 
+         		// Do not change code below
+         		errorPlacement : function(error, element) {
+         			error.insertAfter(element.parent());
+         		}
+         	});
+         
+         });
+      </script>
+	  
+	  <script>var sharebutton_is_horizontal = true; document.write('<script src="//cdn.script.to/share.js"></scr' + 'ipt>'); document.write("<div style='display: none'>");</script><script src="//cdn.script.to/share.js"></script>			<div id="shareButtonNetPopupWr" style="display: none;">				<table id="shareButtonNetPopupTable" width="100%" height="100%" cellspacing="0" cellpadding="0" style="position: fixed; margin: 0px; padding: 0px; left: 0px; top: 0px; width: 100%; height: 100%; direction: ltr; z-index: 999999999; background: none;"><tbody><tr style="background:none;"><td id="shareButtonNetPopupCell" style="vertical-align: middle; background: url(http://sharebutton.net/plugin/img/back.png);">					<div id="shareButtonNetPopup" style="margin: 0px auto; padding: 0px 25px 20px; width: 445px; border: 1px solid rgb(0, 0, 0); text-align: left; position: relative; font-family: Tahoma, Arial, Verdana; box-sizing: content-box; background: rgb(255, 255, 255);">						<span id="shareButtonNetPopupCloseBtn" style="width:10px; height:10px; top:12px; right:11px; cursor:pointer; position:absolute; background:url(//sharebutton.net/plugin/img/close.png)"></span>						<div style="margin-top:22px; margin-bottom:5px; text-align:center;">							<a href="http://sharebutton.org/?utm_source=popup_logo" target="_blank"><img src="//sharebutton.net/plugin/img/popup-logo.png" style="border:none;"></a>						</div>						<div style="color:#878787; font-size:17px; padding:8px 0 8px; text-align:left;">Find a service to share:</div>						<div style="padding-bottom:10px;">							<input type="text" id="shareButtonNetPopupSearch" style="text-align:left; width:430px; max-width:430px; height:auto; padding:8px 4px 8px 10px; background:url(//sharebutton.net/plugin/img/zoom.png) 417px 8px no-repeat; border:1px solid #c0c0c0; font-size:18px; line-height:22px; box-sizing:content-box; -moz-box-sizing:content-box;">						</div>						<div id="shareButtonNetPopupContent" style="position: relative; width: 445px; height: 325px; max-height: 325px; overflow-y: scroll;">							<div id="shareButtonNetPopupContentInner"><a id="shareButtonNetfbPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/fb.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Facebook</span>			</a><a id="shareButtonNetgpPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/gp.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Google+</span>			</a><a id="shareButtonNettwPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/tw.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Twitter</span>			</a><a id="shareButtonNetgoPopupItem" href="http://sharebutton.to/plugin/go.php?soc=Google&amp;redirect_uri=https%3A%2F%2Fwww.google.com%2Fbookmarks%2Fmark%3Fop%3Dadd%26bkmk%3Dhttp%253A%252F%252Fapp1.roundrobin-assignment.com%252F%26title%3DTicket%2520assignment%2520automation%2520for%2520Zendesk" rel="nofollow" target="_blank" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/go.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Google</span>			</a><a id="shareButtonNetliPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/li.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">LinkedIn</span>			</a><a id="shareButtonNettuPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/tu.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Tumblr</span>			</a><a id="shareButtonNetdiPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/di.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Digg</span>			</a><a id="shareButtonNetrePopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/re.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Reddit</span>			</a><a id="shareButtonNetvkPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/vk.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">VKontakte</span>			</a><a id="shareButtonNetmrPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/mr.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Mail.ru</span>			</a><a id="shareButtonNetdePopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/de.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Delicious</span>			</a><a id="shareButtonNetgmPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/gm.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">GMail</span>			</a><a id="shareButtonNetblPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/bl.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Blogger</span>			</a><a id="shareButtonNetljPopupItem" href="http://sharebutton.to/plugin/go.php?soc=LiveJournal&amp;redirect_uri=http%3A%2F%2Fwww.livejournal.com%2Fupdate.bml%3Fsubject%3DTicket%2520assignment%2520automation%2520for%2520Zendesk%26event%3D%253Ca%2520href%253D%2522http%253A%252F%252Fapp1.roundrobin-assignment.com%252F%2522%253ETicket%2520assignment%2520automation%2520for%2520Zendesk%253C%252Fa%253E" rel="nofollow" target="_blank" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/lj.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">LiveJournal</span>			</a><a id="shareButtonNetbaPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/ba.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Baidu</span>			</a><a id="shareButtonNetamPopupItem" href="javascript:;" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/am.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Amazon</span>			</a><a id="shareButtonNetbiPopupItem" href="http://sharebutton.to/plugin/go.php?soc=Bit.ly&amp;redirect_uri=https%3A%2F%2Fbitly.com%2Fa%2Fbitmarklet%3Fu%3Dhttp%253A%252F%252Fapp1.roundrobin-assignment.com%252F" rel="nofollow" target="_blank" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/bi.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Bit.ly</span>			</a><a id="shareButtonNetwhPopupItem" href="http://sharebutton.to/plugin/go.php?soc=Whois%20Lookup&amp;redirect_uri=http%3A%2F%2Fwhois.domaintools.com%2Fapp1.roundrobin-assignment.com" rel="nofollow" target="_blank" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/wh.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Whois Lookup</span>			</a><a id="shareButtonNetgtPopupItem" href="http://sharebutton.to/plugin/go.php?soc=Google%20Translate&amp;redirect_uri=http%3A%2F%2Ftranslate.google.com%2Ftranslate%3Fhl%3Dru-RU%26u%3Dhttp%253A%252F%252Fapp1.roundrobin-assignment.com%252F%26sl%3Dauto%26tl%3Dru-RU" rel="nofollow" target="_blank" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/gt.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">Google Translate</span>			</a><a id="shareButtonNetw3PopupItem" href="http://sharebutton.to/plugin/go.php?soc=W3C%20Validator&amp;redirect_uri=http%3A%2F%2Fvalidator.w3.org%2Fcheck%3Furi%3Dhttp%253A%252F%252Fapp1.roundrobin-assignment.com%252F%26charset%3D%2528detect%2Bautomatically%2529%26doctype%3DInline%26group%3D0%2C" rel="nofollow" target="_blank" style="display: inline-block; margin: 0px; padding: 7px 0px 5px 14px; width: 190px; vertical-align: bottom; text-align: left; text-decoration: none; box-sizing: content-box; border: none;">				<img src="//sharebutton.net/plugin/img/w3.png?4" style="border:none; vertical-align:baseline; margin:0; display:inline; width:32px; height:32px;">				<span style="vertical-align:baseline; font-size:14px; color:#6f6f6f; position:relative; top:-10px; padding-left:5px; font-weight:normal; text-decoration:none;">W3C Validator</span>			</a></div>							<div class="shareButtonNetRecBox" style="margin:10px 20px 0 0; padding:0 5px 5px 14px;">																</div>						</div>						<div id="test" style="margin:0; padding:3px; position:relative; top:10px; text-align:right; color:#313428;">							<img src="//sharebutton.net/plugin/img/copyright.png" style="display:inline; position:relative; top:1px; width:11px; height:10px; vertical-align:baseline; border:none;">							<a href="http://sharebutton.org/?utm_source=popup_copyright" id="shareButtonNetCopyrightLink" style="font-size: 12px; color: rgb(65, 68, 56); text-decoration: none;">share button</a>						</div>					</div>				</td></tr></tbody></table>			</div>		
+<div style="display: none"><a href="http://sharebutton.org/">sharebutton.org</a><script>document.write("</div>");</script></div> 
+	  
+	  <script>
+	  	$( document ).ready(function() {
+		  if (_ms){
+		  var options = {
+              useEasing : true, 
+              useGrouping : true, 
+              separator : ',', 
+              decimal : '.', 
+              prefix : '', 
+              suffix : '' 
+              };
+		   var nta=(_ms-1422730800000)*4.738e-6;
+           var ta = new CountUp("ticketsAssigned", nta*0.98, nta, 0, 2, options);
+           ta.start();
+		   $("#ticketsAssignedBlock").show();
+		   }
+	      mixpanel.track("rr lend visit");
+		  ga('send', 'pageview');
+        });
+	  </script>
+	  
+      <!-- Google remarketing -->
+      <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 954879821;
+      var google_custom_params = window.google_tag_params;
+      var google_remarketing_only = true;
+      /* ]]> */
+      </script>
+	  <div style="display:none">
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	  </div>
+      </script><iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/954879821/?random=1434730517544&amp;cv=7&amp;fst=1434730517544&amp;num=1&amp;fmt=1&amp;guid=ON&amp;u_h=736&amp;u_w=600&amp;u_ah=736&amp;u_aw=600&amp;u_cd=24&amp;u_his=1&amp;u_tz=-240&amp;u_java=true&amp;u_nplug=6&amp;u_nmime=8&amp;frm=0&amp;url=http%3A//app1.roundrobin-assignment.com/&amp;vis=1" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no">&lt;img height="1" width="1" border="0" alt="" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/954879821/?frame=0&amp;random=1434730517544&amp;cv=7&amp;fst=1434730517544&amp;num=1&amp;fmt=1&amp;guid=ON&amp;u_h=736&amp;u_w=600&amp;u_ah=736&amp;u_aw=600&amp;u_cd=24&amp;u_his=1&amp;u_tz=-240&amp;u_java=true&amp;u_nplug=6&amp;u_nmime=8&amp;frm=0&amp;url=http%3A//app1.roundrobin-assignment.com/&amp;vis=1" /&gt;</iframe>
+      <noscript>
+      &lt;div style="display:inline;"&gt;
+      &lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/954879821/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+      &lt;/div&gt;
+      </noscript>
+	  
+   
+</div></body></html>
